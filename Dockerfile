@@ -17,13 +17,13 @@ RUN sudo apt-get install -y \
 
 RUN apt-get install -y build-essential
 RUN apt install -y libcjson1 libcjson-dev jq
-RUN make --directory=oidc-agent-5.0.0
 
-#RUN apt install -y oidc-agent-cli
-#RUN rm -rf /tmp/oidc-agent-service/${UID}/
-#RUN ln -s /tmp/oidc-agent-service-${UID} /tmp/oidc-agent-service/${UID}
+RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_bin
+RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_conf
+RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_bash
+RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_scheme_handler
+RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_xsession_script
+RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_lib
+RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_lib-dev
 
-#RUN eval `oidc-agent-service use`
-#RUN eval `oidc-agent-service restart`
-#RUN oidc-gen -u juno
-
+COPY --chmod=0700 setupscript.sh /home/jovyan/setupscript.sh

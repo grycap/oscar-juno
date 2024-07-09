@@ -12,6 +12,7 @@ functions:
          JHUB_BASE_URL: "/system/services/juno/exposed"
          JUPYTER_DIRECTORY: "/mnt/juno"
          GRANT_SUDO: "yes"
+         OSCAR_ENDPOINT: ""
      mount:
        storage_provider: minio.default
        path: /juno

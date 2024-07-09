@@ -1,0 +1,9 @@
+functions:
+  oscar:
+  - cluster-id:
+      name: cowsay
+      cpu: '1.0'
+      memory: 1Gi
+      image: ghcr.io/grycap/cowsay
+      script: script_cowsay.sh
+      log_level: CRITICAL   # To avoid supervisor logs in response

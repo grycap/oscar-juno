@@ -5,7 +5,7 @@ functions:
      memory: 2Gi
      cpu: '1.0'
      image: ghcr.io/sergiolangaritabenitez/juno
-     script: jupyterscript.sh
+     script: script.sh
      environment:
        Variables:
          JUPYTER_TOKEN: "junoroot"

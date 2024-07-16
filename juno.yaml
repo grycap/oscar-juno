@@ -15,7 +15,7 @@ functions:
          OSCAR_ENDPOINT: ""
      mount:
        storage_provider: minio.default
-       path: /juno
+       path: juno
      expose:
       min_scale: 1
       max_scale: 1

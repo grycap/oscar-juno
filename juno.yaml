@@ -4,7 +4,7 @@ functions:
      name: juno
      memory: 2Gi
      cpu: '1.0'
-     image: ghcr.io/sergiolangaritabenitez/juno
+     image: ghcr.io/grycap/juno
      script: script.sh
      environment:
        Variables:

@@ -1,2 +1,2 @@
-docker build -t ghcr.io/sergiolangaritabenitez/juno .
-docker push ghcr.io/sergiolangaritabenitez/juno
+docker build -t ghcr.io/grycap/juno .
+docker push ghcr.io/grycap/juno

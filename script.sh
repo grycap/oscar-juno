@@ -1,5 +1,5 @@
 sleep 10
-export GIT_REPO="SergioLangaritaBenitez/juno"
+export GIT_REPO="grycap/juno"
 export OSCAR_REPO="grycap/oscar"
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/00.-setup.ipynb > $JUPYTER_DIRECTORY/00.-setup.ipynb
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/01.-cowsay.ipynb > $JUPYTER_DIRECTORY/01.-cowsay.ipynb

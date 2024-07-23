@@ -1,0 +1,3 @@
+[submodule "docker/apricotlab"]
+	path = docker/apricotlab
+	url = git@github.com:grycap/apricotlab.git

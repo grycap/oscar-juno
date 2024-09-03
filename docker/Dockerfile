@@ -1,7 +1,7 @@
 FROM jupyter/minimal-notebook
 
 USER root
-
+ENV OIDC_SOCK=/tmp/oidc-agent-service-0/oidc-agent.sock
 RUN apt-get update
 RUN curl https://codeload.github.com/indigo-dc/oidc-agent/zip/refs/tags/v5.0.0 --output oidc-agent.zip
 
@@ -17,7 +17,7 @@ RUN sudo apt-get install -y \
 
 RUN apt-get install -y build-essential
 RUN apt install -y libcjson1 libcjson-dev jq
-
+RUN pip install oscar-python liboidcagent
 RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_bin
 RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_conf
 RUN make --directory=/home/jovyan/oidc-agent-5.0.0 install_bash

@@ -1,10 +1,12 @@
 sleep 10
 export GIT_REPO="grycap/oscar-juno"
 export OSCAR_REPO="grycap/oscar"
+mkdir -p $JUPYTER_DIRECTORY
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/00.-setup.ipynb > $JUPYTER_DIRECTORY/00.-setup.ipynb
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/01.-cowsay.ipynb > $JUPYTER_DIRECTORY/01.-cowsay.ipynb
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/02.-async.ipynb > $JUPYTER_DIRECTORY/02.-async.ipynb
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/03.-sync.ipynb > $JUPYTER_DIRECTORY/03.-sync.ipynb
+curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/04.-resetOSCAR.ipynb > $JUPYTER_DIRECTORY/04.-resetOSCAR.ipynb
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/cowsay.yaml > $JUPYTER_DIRECTORY/cowsay.yaml
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/body-async.yaml > $JUPYTER_DIRECTORY/body-async.yaml

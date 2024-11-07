@@ -1,4 +1,4 @@
-sleep 10
+sleep 15
 export GIT_REPO="grycap/oscar-juno"
 export OSCAR_REPO="grycap/oscar"
 mkdir -p $JUPYTER_DIRECTORY

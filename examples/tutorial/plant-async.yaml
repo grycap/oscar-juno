@@ -8,7 +8,7 @@ functions:
       script: script_plant_async.sh
       input:
       - storage_provider: minio.default
-        path: plant-classification-async/input
+        path: plant-classification-async-test/input
       output:
       - storage_provider: minio.default
-        path: plant-classification-async/output
+        path: plant-classification-async-test/output

@@ -6,7 +6,7 @@ It also includes support for [Elyra](https://github.com/elyra-ai/elyra) and [APR
 
 ## Forms of use
 
-To use this module from the OSCAR cluster, you simply need to enter the cluster web UI and then go to `Nootebooks` -> `Deploy`.
+To use this module from the OSCAR cluster, you simply need to enter the cluster web UI and then go to `Nootebooks` → `Deploy`.
 
 You also can take the `juno.yaml` and `script.sh`, presents in this project and deploy it as an OSCAR service.
 

@@ -10,7 +10,7 @@ curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/01-syn
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-async.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/02-async.ipynb
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/cowsay-sync.yaml > $JUPYTER_DIRECTORY/oscar-tutorial/cowsay-sync.yaml
-curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/plant-asnc.yaml > $JUPYTER_DIRECTORY/oscar-tutorial/plant-async.yaml
+curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/plant-async.yaml > $JUPYTER_DIRECTORY/oscar-tutorial/plant-async.yaml
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/script_cowsay_sync.sh > $JUPYTER_DIRECTORY/oscar-tutorial/script_cowsay_sync.sh
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/script_plant_async.sh > $JUPYTER_DIRECTORY/oscar-tutorial/script_plant_async.sh

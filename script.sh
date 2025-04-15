@@ -21,7 +21,7 @@ curl https://raw.githubusercontent.com/$OSCAR_REPO/master/examples/body-pose-det
 curl https://raw.githubusercontent.com/$OSCAR_REPO/master/examples/plant-classification-sync/images/image1.jpg > $JUPYTER_DIRECTORY/plant.jpg
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/oscar_tutorial.pipeline > $JUPYTER_DIRECTORY/oscar_tutorial.pipeline
 
-curl https://raw.githubusercontent.com/grycap/apricotlab/main/apricot-tutorial.ipynb > $JUPYTER_DIRECTORY/apricot-tutorial.ipynb
+curl https://raw.githubusercontent.com/grycap/apricotlab/main/apricot_tutorial.ipynb > $JUPYTER_DIRECTORY/apricot-tutorial.ipynb
 curl https://raw.githubusercontent.com/grycap/apricotlab/main/apricot_magics/apricot_magics.py > $JUPYTER_DIRECTORY/apricot_magics.py
 sed -i 's/resources_dir = current_dir.parent \/ "resources"/resources_dir = current_dir \/ "resources"/g' $JUPYTER_DIRECTORY/apricot_magics.py
 

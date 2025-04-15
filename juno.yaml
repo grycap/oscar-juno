@@ -8,11 +8,12 @@ functions:
      script: script.sh
      environment:
        Variables:
-         JUPYTER_TOKEN: "junoroot"
          JHUB_BASE_URL: "/system/services/juno/exposed"
          JUPYTER_DIRECTORY: "/mnt/home"
          GRANT_SUDO: "yes"
          OSCAR_ENDPOINT: ""
+       Secrets:
+         JUPYTER_TOKEN: "junoroot"
      mount:
        storage_provider: minio.default
        path: home

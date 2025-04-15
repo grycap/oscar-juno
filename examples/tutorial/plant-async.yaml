@@ -1,0 +1,14 @@
+functions:
+  oscar:
+  - cluster-id:
+      name: plant-classification-async-test
+      memory: 1Gi
+      cpu: '1.0'
+      image: grycap/oscar-theano-plants
+      script: script_plant_async.sh
+      input:
+      - storage_provider: minio.default
+        path: plant-classification-async-test/input
+      output:
+      - storage_provider: minio.default
+        path: plant-classification-async-test/output

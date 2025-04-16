@@ -4,6 +4,7 @@ export OSCAR_REPO="grycap/oscar"
 mkdir -p $JUPYTER_DIRECTORY
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync
+mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/output
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async/img
 

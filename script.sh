@@ -3,7 +3,10 @@ export GIT_REPO="grycap/oscar-juno"
 export OSCAR_REPO="grycap/oscar"
 mkdir -p $JUPYTER_DIRECTORY
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial
-mkdir $JUPYTER_DIRECTORY/oscar-tutorial/img
+mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync
+mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async
+mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async/img
+
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/00-setup.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/00-setup.ipynb
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/01-sync/01-sync.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/01-sync.ipynb

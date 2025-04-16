@@ -4,6 +4,7 @@ export OSCAR_REPO="grycap/oscar"
 mkdir -p $JUPYTER_DIRECTORY
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync
+mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/output
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async/img
 
@@ -13,7 +14,7 @@ curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/01-syn
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-async/02-async.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/02-async/02-async.ipynb
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/01-sync/cowsay-sync.yaml > $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/cowsay-sync.yaml
-curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-async/plant-asnc.yaml > $JUPYTER_DIRECTORY/oscar-tutorial/02-async/plant-async.yaml
+curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-async/plant-async.yaml > $JUPYTER_DIRECTORY/oscar-tutorial/02-async/plant-async.yaml
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/01-sync/script_cowsay_sync.sh > $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/script_cowsay_sync.sh
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-async/script_plant_async.sh > $JUPYTER_DIRECTORY/oscar-tutorial/02-async/script_plant_async.sh

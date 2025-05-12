@@ -2,7 +2,7 @@
 
 This project enables the deployment of Jupyter Notebooks inside an [OSCAR](https://oscar.grycap.net/) cluster, allowing users to interact with OSCAR, through its [Python client](https://github.com/grycap/oscar_python).  
 
-It also includes support for [Elyra](https://github.com/elyra-ai/elyra), for composing AI inference pipelines, and [APRICOTLab](https://github.com/grycap/apricotlab), to facilitate computational reproducibility by deploying virtualized infrastructures via the [Infrastructure Manager (IM])(https://www.grycap.upv.es/im).
+It also includes support for [Elyra](https://github.com/elyra-ai/elyra), for composing AI inference pipelines, and [APRICOTLab](https://github.com/grycap/apricotlab), to facilitate computational reproducibility by deploying virtualized infrastructures via the [Infrastructure Manager (IM)](https://www.grycap.upv.es/im).
 
 ## Forms of use
 

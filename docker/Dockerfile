@@ -35,7 +35,7 @@ RUN make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_bin && \
     make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_lib && \
     make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_lib-dev
 
-RUN pip install oscar-python liboidcagent
+RUN pip install oscar-python==1.3.1 liboidcagent
 RUN pip install --upgrade "elyra[all]"
 
 COPY --chmod=0700 setupscript.sh $OIDC_FOLDER/setupscript.sh

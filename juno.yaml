@@ -7,12 +7,12 @@ functions:
      image: ghcr.io/grycap/juno
      script: script.sh
      environment:
-       Variables:
+       variables:
          JHUB_BASE_URL: "/system/services/juno/exposed"
          JUPYTER_DIRECTORY: "/mnt/home"
          GRANT_SUDO: "yes"
          OSCAR_ENDPOINT: ""
-       Secrets:
+       secrets:
          JUPYTER_TOKEN: "junoroot"
      mount:
        storage_provider: minio.default

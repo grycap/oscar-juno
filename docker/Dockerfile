@@ -41,9 +41,12 @@ RUN pip install --upgrade "elyra[all]"
 COPY --chmod=0700 setupscript.sh $OIDC_FOLDER/setupscript.sh
 COPY --chmod=0700 apricotlab $OIDC_FOLDER/apricotlab
 
-RUN sed -i "s|realpath --relative-to=\"\$(pwd)\" resources/infrastructuresList.json|realpath --relative-to=\$JUPYTER_DIRECTORY \$JUPYTER_DIRECTORY/resources/infrastructuresList.json|g" $OIDC_FOLDER/apricotlab/src/utils.ts && \
-    sed -i "s|realpath --relative-to=\"\$(pwd)\" resources/deployed-template.yaml|realpath --relative-to=\$JUPYTER_DIRECTORY \$JUPYTER_DIRECTORY/resources/deployed-template.yaml|g" $OIDC_FOLDER/apricotlab/src/utils.ts && \
-    sed -i "s|realpath --relative-to=\"\$(pwd)\" resources/deployable_templates|realpath --relative-to=\$JUPYTER_DIRECTORY \$JUPYTER_DIRECTORY/resources/deployable_templates|g" $OIDC_FOLDER/apricotlab/src/utils.ts
+RUN sed -i \
+  -e 's|realpath --relative-to="$(pwd)" resources/infrastructuresList.json|realpath --relative-to=$JUPYTER_DIRECTORY $JUPYTER_DIRECTORY/resources/infrastructuresList.json|g' \
+  -e 's|realpath --relative-to="$(pwd)" resources/deployed-template.yaml|realpath --relative-to=$JUPYTER_DIRECTORY $JUPYTER_DIRECTORY/resources/deployed-template.yaml|g' \
+  -e 's|realpath --relative-to="$(pwd)" resources/deployable_templates|realpath --relative-to=$JUPYTER_DIRECTORY $JUPYTER_DIRECTORY/resources/deployable_templates|g' \
+  -e 's|realpath --relative-to="$(pwd)" resources/authfile|realpath --relative-to=$JUPYTER_DIRECTORY $JUPYTER_DIRECTORY/resources/authfile|g' \
+  $OIDC_FOLDER/apricotlab/src/utils.ts
 
 RUN pip install -ve $OIDC_FOLDER/apricotlab && \
     jupyter labextension develop --overwrite $OIDC_FOLDER/apricotlab

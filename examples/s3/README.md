@@ -7,11 +7,11 @@ When creating the service according to the [Jupyter](https://github.com/grycap/o
 
 ![fdl-s3.png](images/fdl-s3.png)
 
-In the S3 bucket, we must modify the default bucket configuration. In the permissions, we disable blocking public access.
+In the S3 bucket, we must modify the default bucket configuration. In the `permissions`, we disable `Block all public access`.
 
 ![public-access.png](images/public-access.png)
 
-In object properties, we enable ACLs according to the configuration shown in the figure.
+In `Object Ownership`, we enable ACLs according to the configuration shown in the figure.
 
 ![acl.png](images/acl.png)
 

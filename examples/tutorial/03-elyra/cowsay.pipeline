@@ -1,0 +1,201 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "24867025-4b90-4187-8dd9-120a80c734f7",
+          "type": "execution_node",
+          "op": "execute-python-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [
+                {
+                  "env_var": "OSCAR_ENDPOINT"
+                },
+                {
+                  "env_var": "YOUR_TOKEN"
+                }
+              ],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "setup_client.py",
+              "runtime_image": "continuumio/anaconda3@sha256:a2816acd3acda208d92e0bf6c11eb41fda9009ea20f24e123dbf84bb4bd4c4b8"
+            },
+            "label": "Get EGI Token",
+            "ui_data": {
+              "label": "Get EGI Token",
+              "image": "/system/services/juno-dupafu-kreoam31/exposed/static/elyra/python.svg",
+              "x_pos": 185,
+              "y_pos": 142,
+              "description": "Run Python script"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "d82bc050-b17e-4db9-90f1-c8a0c9bcd875",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "dependencies": [],
+              "include_subdirectories": false,
+              "outputs": [],
+              "env_vars": [
+                {
+                  "env_var": "SERVICE_NAME",
+                  "value": "cowsay-sync-test"
+                },
+                {
+                  "env_var": "TEXT_INPUT",
+                  "value": "Hello world!"
+                }
+              ],
+              "kubernetes_pod_annotations": [],
+              "kubernetes_pod_labels": [],
+              "kubernetes_secrets": [],
+              "kubernetes_shared_mem_size": {},
+              "kubernetes_tolerations": [],
+              "mounted_volumes": [],
+              "filename": "invoke_service_cowsay.ipynb",
+              "runtime_image": "continuumio/anaconda3@sha256:a2816acd3acda208d92e0bf6c11eb41fda9009ea20f24e123dbf84bb4bd4c4b8"
+            },
+            "label": "OSCAR Cowsay",
+            "ui_data": {
+              "label": "OSCAR Cowsay",
+              "image": "/system/services/juno-dupafu-kreoam31/exposed/static/elyra/notebook.svg",
+              "x_pos": 547,
+              "y_pos": 211,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "47c16547-3274-46a6-91bc-2ea4d7f30cac",
+                  "node_id_ref": "24867025-4b90-4187-8dd9-120a80c734f7",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": [
+            {
+              "id": "3c2d74ce-f6f7-4c87-b921-0733199b58c3",
+              "x_pos": 533.9999542236328,
+              "y_pos": 116,
+              "width": 175,
+              "height": 58,
+              "content": "This node is used to invoke the Cowsay toy service.",
+              "associated_id_refs": [
+                {
+                  "id": "aad50580-2884-438a-b8a0-bc8b81418069",
+                  "node_ref": "d82bc050-b17e-4db9-90f1-c8a0c9bcd875"
+                }
+              ]
+            },
+            {
+              "id": "9a362fe4-adce-464a-8155-536a0a53cf67",
+              "x_pos": 159.99998474121094,
+              "y_pos": 49,
+              "width": 205,
+              "height": 72,
+              "content": "This node is used to obtain saved EGI token and setup client configuration.",
+              "associated_id_refs": [
+                {
+                  "id": "4f4ac8c8-a17d-489b-9125-5b6ca06d3ca3",
+                  "node_ref": "24867025-4b90-4187-8dd9-120a80c734f7"
+                }
+              ]
+            }
+          ]
+        },
+        "version": 8,
+        "properties": {
+          "name": "cowsay",
+          "runtime": "Generic",
+          "pipeline_defaults": {
+            "kubernetes_shared_mem_size": {},
+            "kubernetes_pod_labels": [],
+            "mounted_volumes": [],
+            "kubernetes_tolerations": [],
+            "kubernetes_pod_annotations": [],
+            "kubernetes_secrets": [],
+            "env_vars": []
+          }
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}

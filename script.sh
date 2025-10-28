@@ -8,6 +8,7 @@ mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/output
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async/img
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async/output
+mkdir $JUPYTER_DIRECTORY/oscar-tutorial/03-elyra
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/00-setup.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/00-setup.ipynb
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/01-sync/01-sync.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/01-sync.ipynb
@@ -22,6 +23,10 @@ curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-asy
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-async/img/plant-input.jpg > $JUPYTER_DIRECTORY/oscar-tutorial/02-async/img/plant-input.jpg
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/02-async/img/plant-output.jpg > $JUPYTER_DIRECTORY/oscar-tutorial/02-async/img/plant-output.jpg
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/oscar_tutorial.pipeline > $JUPYTER_DIRECTORY/oscar-tutorial/oscar_tutorial.pipeline
+
+curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/03-elyra/cowsay.pipeline > $JUPYTER_DIRECTORY/oscar-tutorial/03-elyra/cowsay.pipeline
+curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/03-elyra/setup_client.py > $JUPYTER_DIRECTORY/oscar-tutorial/03-elyra/setup_client.py
+curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/03-elyra/invoke_service_cowsay.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/03-elyra/invoke_service_cowsay.ipynb
 
 curl https://raw.githubusercontent.com/grycap/apricotlab/main/apricot_tutorial.ipynb > $JUPYTER_DIRECTORY/apricot-tutorial.ipynb
 curl https://raw.githubusercontent.com/grycap/apricotlab/main/apricot_magics/apricot_magics.py > $JUPYTER_DIRECTORY/apricot_magics.py

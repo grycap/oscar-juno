@@ -35,7 +35,7 @@ RUN make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_bin && \
     make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_lib && \
     make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_lib-dev
 
-RUN pip install oscar-python==1.3.1 liboidcagent
+RUN pip install liboidcagent
 RUN pip install --upgrade "elyra[all]"
 
 COPY --chmod=0700 setupscript.sh $OIDC_FOLDER/setupscript.sh
@@ -47,5 +47,15 @@ RUN sed -i "s|realpath --relative-to=\"\$(pwd)\" resources/infrastructuresList.j
 
 RUN pip install -ve $OIDC_FOLDER/apricotlab && \
     jupyter labextension develop --overwrite $OIDC_FOLDER/apricotlab
+
+# Added in release 2025_10_28
+RUN pip install oscar-python==1.3.3
+
+COPY wrapp_git.sh /usr/local/bin/git
+RUN chmod +x /usr/local/bin/git
+RUN git config --global --add safe.directory '*'
+
+RUN jupyter notebook --generate-config
+RUN echo "c.FileContentsManager.delete_to_trash = False" >> /root/.jupyter/jupyter_notebook_config.py
 
 ENTRYPOINT [ "jupyter", "lab", "--allow-root","--ip=0.0.0.0", "--no-browser" ]

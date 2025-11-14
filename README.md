@@ -10,6 +10,29 @@ To use this functionality from an OSCAR cluster, you simply need to enter the Da
 
 You also can use the `juno.yaml` and `script.sh`, presents in this repository and deploy it as an OSCAR service.
 
+## Building the container image
+
+The published JUNO image at [ghcr.io/grycap/juno](https://github.com/orgs/grycap/packages/container/package/juno) is multi-arch (`linux/amd64` + `linux/arm64`), so it runs on both x86_64 OSCAR nodes and macOS-based KIND clusters.  
+Buildx is required to produce and push the multi-arch image:
+
+```bash
+./docker/buildandpush.sh <tag>
+```
+
+Optional environment variables:
+- `IMAGE_NAME` (default `ghcr.io/grycap/juno`)
+- `PLATFORM` (default `linux/amd64,linux/arm64`; accepts other platform lists)
+- `REGISTER_BINFMT=false` to skip QEMU/binfmt setup when the host already supports the desired architectures.
+- `PUSH=false` to disable publishing (useful when you only want to test a build)
+- `LOAD=true` to load the resulting image into the local Docker engine (requires `PLATFORM` to be a single architecture)
+
+**Local test example**
+
+```bash
+PUSH=false LOAD=true PLATFORM=linux/arm64 ./docker/buildandpush.sh test-local
+docker run --rm -it ghcr.io/grycap/juno:test-local jupyter --version
+```
+
 ## Examples
 
 If you go to the examples directory, you can find a simple tutorial that will teach you how to use OSCAR through Jupyter Notebooks with two basic use cases.

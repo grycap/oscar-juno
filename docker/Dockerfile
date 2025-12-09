@@ -12,9 +12,12 @@ RUN apt-get update -y && \
 
 RUN pip install IM-client jupyter==1.0.0
 RUN echo "deb http://gb.archive.ubuntu.com/ubuntu jammy main" >> /etc/apt/sources.list 
-RUN apt update && apt install -y libgtk-3-0t64 shared-mime-info shared-mime-info libgtk-3-0t64 xdg-desktop-portal-gtk
+RUN echo "deb http://ports.ubuntu.com/ubuntu-ports jammy main" >> /etc/apt/sources.list 
+# Exit 0 to ignore errors due to some packages not being found for ARM or AMD
+RUN apt-get update; exit 0
+RUN apt-get install -y libgtk-3-0t64 shared-mime-info shared-mime-info libgtk-3-0t64 xdg-desktop-portal-gtk
  
-RUN apt install -y libwebkit2gtk-4.0-dev
+RUN apt-get install -y libwebkit2gtk-4.0-dev
 RUN apt-get install -y \
       curl git unzip make nodejs \
       build-essential libcjson1 libcjson-dev jq \
@@ -36,6 +39,13 @@ RUN make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_bin && \
     make -C $OIDC_FOLDER/oidc-agent-5.0.0 install_lib-dev
 
 RUN pip install liboidcagent
+
+# Fix broken dependencies for elyra
+RUN echo 'Cython < 3.0' > /tmp/constraint.txt && PIP_CONSTRAINT=/tmp/constraint.txt pip wheel PyYAML==5.4.1
+RUN git clone --branch v1.6.1 https://github.com/kubeflow/kfp-tekton /kfp-tekton && \
+    pip install /kfp-tekton/sdk/python && \
+    rm -rf /kfp-tekton
+
 RUN pip install --upgrade "elyra[all]"
 
 COPY --chmod=0700 setupscript.sh $OIDC_FOLDER/setupscript.sh

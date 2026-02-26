@@ -20,6 +20,16 @@ It will show you how to:
 - Create and call an asynchronous service.
 - Delete the created services.
 
+## Generate Docker Images
+
+To build Docker image, navigate to the `docker` directory and run:
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/grycap/juno:full -f Dockerfile.full .
+```
+
+This command creates a multi-architecture image for both AMD64 and ARM64 platforms.
+
 ## Resources and Documentation
 
 - [OSCAR Documentation](https://docs.oscar.grycap.net/)  

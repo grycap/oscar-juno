@@ -1,0 +1,48 @@
+FROM --platform=$BUILDPLATFORM ghcr.io/grycap/juno:minimal
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
+ARG OIDC_FOLDER=""
+ENV OIDC_SOCK=/tmp/oidc-agent-service-0/oidc-agent.sock
+
+USER root
+
+RUN apt-get update && apt-get install -y curl && pip install IM-client
+
+RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
+    echo "deb http://gb.archive.ubuntu.com/ubuntu noble main" >> /etc/apt/sources.list && \
+    echo "deb http://ports.ubuntu.com/ubuntu-ports noble main" >> /etc/apt/sources.list; \
+    fi
+
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+# Add oidc-agent from KIT repository
+RUN curl repo.data.kit.edu/repo-data-kit-edu-key.asc > /etc/apt/trusted.gpg.d/kitrepo-archive.asc && \ 
+    echo "deb [signed-by=/etc/apt/trusted.gpg.d/kitrepo-archive.asc] https://repo.data.kit.edu//ubuntu/24.04 ./" > /etc/apt/sources.list  && \
+    echo "deb [signed-by=/etc/apt/trusted.gpg.d/kitrepo-archive.asc] https://repo.data.kit.edu//ubuntu/noble ./" > /etc/apt/sources.list
+RUN apt-get update; exit 0
+
+RUN apt-get install -y git nodejs oidc-agent && \
+    python3 -m pip config set global.break-system-packages true
+
+# Fix broken dependencies for elyra
+RUN echo 'Cython < 3.0' > /tmp/constraint.txt && PIP_CONSTRAINT=/tmp/constraint.txt pip wheel PyYAML==5.4.1
+RUN git clone --branch v1.6.1 https://github.com/kubeflow/kfp-tekton /kfp-tekton && \
+    pip install --no-build-isolation /kfp-tekton/sdk/python && \
+    rm -rf /kfp-tekton
+
+RUN pip install --upgrade "elyra[all]"
+
+# Install apricotlab
+COPY --chmod=0700 apricotlab $OIDC_FOLDER/apricotlab
+
+RUN sed -i "s|realpath --relative-to=\"\$(pwd)\" resources/infrastructuresList.json|realpath --relative-to=\$JUPYTER_DIRECTORY \$JUPYTER_DIRECTORY/resources/infrastructuresList.json|g" $OIDC_FOLDER/apricotlab/src/utils.ts && \
+    sed -i "s|realpath --relative-to=\"\$(pwd)\" resources/deployed-template.yaml|realpath --relative-to=\$JUPYTER_DIRECTORY \$JUPYTER_DIRECTORY/resources/deployed-template.yaml|g" $OIDC_FOLDER/apricotlab/src/utils.ts && \
+    sed -i "s|realpath --relative-to=\"\$(pwd)\" resources/deployable_templates|realpath --relative-to=\$JUPYTER_DIRECTORY \$JUPYTER_DIRECTORY/resources/deployable_templates|g" $OIDC_FOLDER/apricotlab/src/utils.ts
+
+RUN pip install -ve $OIDC_FOLDER/apricotlab && \
+    jupyter labextension develop --overwrite $OIDC_FOLDER/apricotlab
+
+#------------------
+RUN pip install oscar-python==1.3.4
+
+ENTRYPOINT [ "jupyter", "lab", "--allow-root","--ip=0.0.0.0", "--no-browser" ]

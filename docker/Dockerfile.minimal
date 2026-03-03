@@ -1,0 +1,19 @@
+FROM --platform=$BUILDPLATFORM quay.io/jupyter/minimal-notebook:ubuntu-24.04
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+
+USER root
+COPY wrapp_git.sh /usr/local/bin/git
+
+RUN apt-get update -y && \
+    apt-get install -y curl && \
+    python3 -m pip config set global.break-system-packages true && \
+    chmod +x /usr/local/bin/git && \
+    git config --global --add safe.directory '*' && \
+    jupyter notebook --generate-config && \
+    echo "c.FileContentsManager.delete_to_trash = False" >> ~/.jupyter/jupyter_notebook_config.py && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /root/.cache/pip /tmp/*
+
+RUN pip install jupyterlab_git
+
+ENTRYPOINT [ "jupyter", "lab", "--allow-root","--ip=0.0.0.0", "--no-browser" ]

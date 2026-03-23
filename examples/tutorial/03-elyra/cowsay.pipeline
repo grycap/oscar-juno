@@ -169,7 +169,7 @@
               "y_pos": 49,
               "width": 205,
               "height": 72,
-              "content": "This node is used to obtain saved EGI token and setup client configuration.",
+              "content": "This node is used to obtain saved OIDC token and setup client configuration.",
               "associated_id_refs": [
                 {
                   "id": "4f4ac8c8-a17d-489b-9125-5b6ca06d3ca3",

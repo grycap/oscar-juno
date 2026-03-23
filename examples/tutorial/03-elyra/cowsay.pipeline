@@ -34,9 +34,9 @@
               "filename": "setup_client.py",
               "runtime_image": "continuumio/anaconda3@sha256:a2816acd3acda208d92e0bf6c11eb41fda9009ea20f24e123dbf84bb4bd4c4b8"
             },
-            "label": "Get EGI Token",
+            "label": "Get OIDC token",
             "ui_data": {
-              "label": "Get EGI Token",
+              "label": "Get OIDC token",
               "image": "/system/services/juno-dupafu-kreoam31/exposed/static/elyra/python.svg",
               "x_pos": 185,
               "y_pos": 142,

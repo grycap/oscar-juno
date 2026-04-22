@@ -1,7 +1,10 @@
 sleep 15
+
 export GIT_REPO="grycap/oscar-juno"
 export OSCAR_REPO="grycap/oscar"
 mkdir -p $JUPYTER_DIRECTORY
+
+if [ "$IMAGE_VERSION" != "minimal" ]; then
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync
 mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/output
@@ -33,5 +36,6 @@ curl https://raw.githubusercontent.com/grycap/apricotlab/main/apricot_magics/apr
 sed -i 's/resources_dir = current_dir.parent \/ "resources"/resources_dir = current_dir \/ "resources"/g' $JUPYTER_DIRECTORY/apricot_magics.py
 
 cp  /apricotlab/resources/ $JUPYTER_DIRECTORY -r
+fi
 
 jupyter lab --ServerApp.allow_root=True  --Session.username=root  --ServerApp.base_url=$JHUB_BASE_URL --IdentityProvider.token=$JUPYTER_TOKEN  --ServerApp.root_dir=$JUPYTER_DIRECTORY --ip=0.0.0.0 --no-browser 

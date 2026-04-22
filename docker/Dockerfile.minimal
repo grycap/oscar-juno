@@ -16,4 +16,6 @@ RUN apt-get update -y && \
 
 RUN pip install jupyterlab_git
 
+ENV IMAGE_VERSION="minimal"
+
 ENTRYPOINT [ "jupyter", "lab", "--allow-root","--ip=0.0.0.0", "--no-browser" ]

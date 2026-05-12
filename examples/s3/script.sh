@@ -2,22 +2,28 @@ sleep 15
 export GIT_REPO="grycap/oscar-juno"
 export OSCAR_REPO="grycap/oscar"
 JUPYTER_DIRECTORY="${JUPYTER_DIRECTORY:-/mnt/home}"
-JUPYTER_RUNTIME_DIR="${JUPYTER_RUNTIME_DIR:-$JUPYTER_DIRECTORY/.jupyter/runtime}"
-JUPYTER_COOKIE_SECRET_FILE="${JUPYTER_COOKIE_SECRET_FILE:-$JUPYTER_RUNTIME_DIR/jupyter_cookie_secret}"
+PERSISTENT_JUPYTER_COOKIE_SECRET_FILE="${PERSISTENT_JUPYTER_COOKIE_SECRET_FILE:-$JUPYTER_DIRECTORY/.jupyter/jupyter_cookie_secret}"
+JUPYTER_COOKIE_SECRET_FILE="${JUPYTER_COOKIE_SECRET_FILE:-/tmp/jupyter_cookie_secret}"
 
-mkdir -p "$JUPYTER_DIRECTORY" "$JUPYTER_RUNTIME_DIR"
-export JUPYTER_RUNTIME_DIR
+mkdir -p "$JUPYTER_DIRECTORY" "$(dirname "$PERSISTENT_JUPYTER_COOKIE_SECRET_FILE")"
 export JUPYTER_COOKIE_SECRET_FILE
+export PERSISTENT_JUPYTER_COOKIE_SECRET_FILE
 
 python3 - <<'PY'
 import os
+import shutil
 from pathlib import Path
 
-secret_file = Path(os.environ["JUPYTER_COOKIE_SECRET_FILE"])
-secret_file.parent.mkdir(parents=True, exist_ok=True)
-if not secret_file.exists():
-    secret_file.write_bytes(os.urandom(32))
-    secret_file.chmod(0o600)
+persistent_secret = Path(os.environ["PERSISTENT_JUPYTER_COOKIE_SECRET_FILE"])
+runtime_secret = Path(os.environ["JUPYTER_COOKIE_SECRET_FILE"])
+
+persistent_secret.parent.mkdir(parents=True, exist_ok=True)
+if not persistent_secret.exists():
+    persistent_secret.write_bytes(os.urandom(32))
+
+runtime_secret.parent.mkdir(parents=True, exist_ok=True)
+shutil.copyfile(persistent_secret, runtime_secret)
+runtime_secret.chmod(0o600)
 PY
 
 mkdir -p "$JUPYTER_DIRECTORY/oscar-tutorial"

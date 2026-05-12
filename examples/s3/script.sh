@@ -1,13 +1,31 @@
 sleep 15
 export GIT_REPO="grycap/oscar-juno"
 export OSCAR_REPO="grycap/oscar"
-mkdir -p $JUPYTER_DIRECTORY
-mkdir $JUPYTER_DIRECTORY/oscar-tutorial
-mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync
-mkdir $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/output
-mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async
-mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async/img
-mkdir $JUPYTER_DIRECTORY/oscar-tutorial/02-async/output
+JUPYTER_DIRECTORY="${JUPYTER_DIRECTORY:-/mnt/home}"
+JUPYTER_RUNTIME_DIR="${JUPYTER_RUNTIME_DIR:-$JUPYTER_DIRECTORY/.jupyter/runtime}"
+JUPYTER_COOKIE_SECRET_FILE="${JUPYTER_COOKIE_SECRET_FILE:-$JUPYTER_RUNTIME_DIR/jupyter_cookie_secret}"
+
+mkdir -p "$JUPYTER_DIRECTORY" "$JUPYTER_RUNTIME_DIR"
+export JUPYTER_RUNTIME_DIR
+export JUPYTER_COOKIE_SECRET_FILE
+
+python3 - <<'PY'
+import os
+from pathlib import Path
+
+secret_file = Path(os.environ["JUPYTER_COOKIE_SECRET_FILE"])
+secret_file.parent.mkdir(parents=True, exist_ok=True)
+if not secret_file.exists():
+    secret_file.write_bytes(os.urandom(32))
+    secret_file.chmod(0o600)
+PY
+
+mkdir -p "$JUPYTER_DIRECTORY/oscar-tutorial"
+mkdir -p "$JUPYTER_DIRECTORY/oscar-tutorial/01-sync"
+mkdir -p "$JUPYTER_DIRECTORY/oscar-tutorial/01-sync/output"
+mkdir -p "$JUPYTER_DIRECTORY/oscar-tutorial/02-async"
+mkdir -p "$JUPYTER_DIRECTORY/oscar-tutorial/02-async/img"
+mkdir -p "$JUPYTER_DIRECTORY/oscar-tutorial/02-async/output"
 
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/00-setup.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/00-setup.ipynb
 curl https://raw.githubusercontent.com/$GIT_REPO/master/examples/tutorial/01-sync/01-sync.ipynb > $JUPYTER_DIRECTORY/oscar-tutorial/01-sync/01-sync.ipynb
@@ -29,4 +47,4 @@ sed -i 's/resources_dir = current_dir.parent \/ "resources"/resources_dir = curr
 
 cp  /apricotlab/resources/ $JUPYTER_DIRECTORY -r
 
-jupyter lab --ServerApp.allow_root=True  --Session.username=root  --ServerApp.base_url=$JHUB_BASE_URL --IdentityProvider.token=$JUPYTER_TOKEN  --ServerApp.root_dir=$JUPYTER_DIRECTORY --ip=0.0.0.0 --no-browser 
+jupyter lab --ServerApp.allow_root=True  --Session.username=root  --ServerApp.base_url=$JHUB_BASE_URL --IdentityProvider.token=$JUPYTER_TOKEN --ServerApp.cookie_secret_file="$JUPYTER_COOKIE_SECRET_FILE" --ServerApp.root_dir=$JUPYTER_DIRECTORY --ip=0.0.0.0 --no-browser 

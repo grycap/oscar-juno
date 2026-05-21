@@ -10,6 +10,12 @@ To use this functionality from an OSCAR cluster, you simply need to enter the Da
 
 You also can use the `juno.yaml` and `script.sh`, presents in this repository and deploy it as an OSCAR service. Note that by default it will deploy the `full` version with Elyra and APRICOTLab.
 
+JUNO stores a persistent copy of the Jupyter cookie secret under
+`$JUPYTER_DIRECTORY/.jupyter/jupyter_cookie_secret` by default and copies it to
+a local runtime file before starting Jupyter. When `$JUPYTER_DIRECTORY` is
+mounted on persistent storage, dashboard links that include `?token=...` keep
+working after the OSCAR exposed service is stopped and started again.
+
 ## Examples
 
 If you go to the examples directory, you can find a simple tutorial that will teach you how to use OSCAR through Jupyter Notebooks with two basic use cases.

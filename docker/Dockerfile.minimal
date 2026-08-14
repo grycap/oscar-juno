@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM quay.io/jupyter/minimal-notebook:ubuntu-24.04
+FROM quay.io/jupyter/minimal-notebook:ubuntu-24.04
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 

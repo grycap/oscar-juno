@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM ghcr.io/grycap/juno:minimal
+FROM ghcr.io/grycap/juno:minimal
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
@@ -9,11 +9,6 @@ USER root
 
 RUN apt-get update && apt-get install -y curl && pip install IM-client
 
-RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
-    echo "deb http://gb.archive.ubuntu.com/ubuntu noble main" >> /etc/apt/sources.list && \
-    echo "deb http://ports.ubuntu.com/ubuntu-ports noble main" >> /etc/apt/sources.list; \
-    fi
-
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 # Add oidc-agent from KIT repository
 RUN curl repo.data.kit.edu/repo-data-kit-edu-key.asc > /etc/apt/trusted.gpg.d/kitrepo-archive.asc && \ 
@@ -21,11 +16,11 @@ RUN curl repo.data.kit.edu/repo-data-kit-edu-key.asc > /etc/apt/trusted.gpg.d/ki
     echo "deb [signed-by=/etc/apt/trusted.gpg.d/kitrepo-archive.asc] https://repo.data.kit.edu//ubuntu/noble ./" > /etc/apt/sources.list
 RUN apt-get update; exit 0
 
-RUN apt-get install -y git nodejs oidc-agent && \
+RUN apt-get install -y build-essential git nodejs oidc-agent && \
     python3 -m pip config set global.break-system-packages true
 
 # Fix broken dependencies for elyra
-RUN echo 'Cython < 3.0' > /tmp/constraint.txt && PIP_CONSTRAINT=/tmp/constraint.txt pip wheel PyYAML==5.4.1
+RUN pip install 'Cython < 3.0' wheel && pip wheel --no-build-isolation PyYAML==5.4.1
 RUN git clone --branch v1.6.1 https://github.com/kubeflow/kfp-tekton /kfp-tekton && \
     pip install --no-build-isolation /kfp-tekton/sdk/python && \
     rm -rf /kfp-tekton

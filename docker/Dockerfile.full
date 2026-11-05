@@ -4,6 +4,7 @@ ARG BUILDPLATFORM
 
 ARG OIDC_FOLDER=""
 ENV OIDC_SOCK=/tmp/oidc-agent-service-0/oidc-agent.sock
+ENV IMAGE_VERSION="full"
 
 USER root
 
